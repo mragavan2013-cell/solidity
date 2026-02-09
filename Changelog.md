@@ -6,6 +6,7 @@ Compiler Features:
 
 Bugfixes:
 * Commandline Interface: Report proper error instead of ICE on non-hex mixed-case address value given via `--libraries`.
+* Yul IR Code Generation: Encode custom error named parameters in declaration order instead of call-site order when used from a `require` function.
 
 
 ### 0.8.36 (2026-07-09)
