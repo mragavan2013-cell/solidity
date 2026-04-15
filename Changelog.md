@@ -7,6 +7,7 @@ Compiler Features:
 * General: Remove support for the experimental EOF (EVM Object Format) backend.
 
 Bugfixes:
+* Constant Evaluator: Fix incorrect result of bitwise `not` and `shift` which were not consistent with codegen.
 * NatSpec: Disallow `@return` tag in event documentation.
 * SMTChecker: Fix incorrect handling of constant operands of unary operations.
 
