@@ -7,6 +7,7 @@ Compiler Features:
 * General: Remove support for the experimental EOF (EVM Object Format) backend.
 
 Bugfixes:
+* Codegen: Fix uninitialized internal function pointers being read from a packed storage slot with the wrong value when a subsequent variable in the slot holds a non-zero value.
 * NatSpec: Disallow `@return` tag in event documentation.
 * SMTChecker: Fix incorrect handling of constant operands of unary operations.
 
