@@ -39,7 +39,7 @@ struct AssemblyCallbacks
 {
 	void swap(StackDepth const _depth)
 	{
-		assembly->appendInstruction(evmasm::swapInstruction(static_cast<unsigned>(_depth.value)));
+		assembly->appendSwap(_depth.value);
 	}
 
 	void pop()
@@ -90,7 +90,7 @@ struct AssemblyCallbacks
 
 	void dup(StackDepth const _depth)
 	{
-		assembly->appendInstruction(evmasm::dupInstruction(static_cast<unsigned>(_depth.value)));
+		assembly->appendDup(_depth.value);
 	}
 
 	SSACFG const* cfg{};
