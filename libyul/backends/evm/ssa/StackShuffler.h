@@ -1000,7 +1000,14 @@ private:
 				auto const& slot = _stack[_offset];
 				bool const notInPosition = !_state.isArgsCompatible(_offset, _offset);
 				bool const isJunk = slot.isJunk();
-				bool const hasSurplus = _state.count(slot) > _state.targetMinCount(slot);
+				// A spilled value always reads as surplus (its min count is zero since it can be
+				// reloaded), but popping it out of a target arg position that demands exactly this
+				// value undoes a reload and livelocks against fixArgsSlot reloading it again.
+				bool const pinnedByDemand =
+					_state.slotIsSpilled(slot) &&
+					_state.offsetInTargetArgsRegion(_offset) &&
+					_state.targetArg(_offset) == slot;
+				bool const hasSurplus = !pinnedByDemand && _state.count(slot) > _state.targetMinCount(slot);
 				bool const hasReachableDuplicate = _state.countReachable(slot) > 1;
 				bool const canBeFreelyGenerated = _stack.canBeFreelyGenerated(slot);
 				bool const isLit = slot.isLiteralValue();
